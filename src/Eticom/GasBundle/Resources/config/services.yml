@@ -1,0 +1,7 @@
+parameters:
+#    eticom_gas.example.class: Eticom\GasBundle\Example
+
+services:
+#    eticom_gas.example:
+#        class: %eticom_gas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

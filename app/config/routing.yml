@@ -1,0 +1,6 @@
+eticom_gas:
+    resource: "@EticomGasBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
