@@ -14,7 +14,7 @@ class compras
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_compras;
+	protected $id;
 
 	/**
 	* @ORM\Column(type="date")	
@@ -24,7 +24,7 @@ class compras
 	/**
 	* @ORM\Column(type="string", length=50)
 	*/
-	protected $nro_guia;
+	protected $nroGuia;
 
 	/**
 	* @ORM\Column(type="integer")
@@ -40,7 +40,7 @@ class compras
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="productos", inversedBy="compras")
-	 * @ORM\JoinColumn(name="id_productos", referencedColumnName="id_productos")
+	 * @ORM\JoinColumn(name="id_productos", referencedColumnName="id")
 	 */
 	protected $productos;
 
@@ -51,7 +51,7 @@ class compras
      */
     public function getIdCompras()
     {
-        return $this->id_compras;
+        return $this->idCompras;
     }
 
     /**
@@ -85,7 +85,7 @@ class compras
      */
     public function setNroGuia($nroGuia)
     {
-        $this->nro_guia = $nroGuia;
+        $this->nroGuia = $nroGuia;
 
         return $this;
     }
@@ -97,7 +97,7 @@ class compras
      */
     public function getNroGuia()
     {
-        return $this->nro_guia;
+        return $this->nroGuia;
     }
 
     /**

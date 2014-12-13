@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+{% block title %} Gestion de Clientes {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+				<div>
+					<h3>Gestion de Clientes</h3>
+				</div>
+				<p></p>
+				<div>
+					<a class="btn btn-danger" href="{{ path('eticom_gas_deudacliente') }}">Clientes con deuda</a>
+					<a class="btn btn-primary" href="{{ path('eticom_gas_todoscliente') }}">Todos los clientes</a>
+					<a href=" {{ path('eticom_gas_nuevocliente') }}" class="btn btn-success">Añadir Cliente</a>
+				</div>
+				<hr>
+				<div>
+					{% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-default" href="{{ path('administracion_principal') }}">Inicio</a>
+                    {% else %}
+                        <a class="btn btn-default" href="{{ path('eticom_gas_inicio') }}">Inicio</a>
+                    {% endif %}					
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+{% endblock %}

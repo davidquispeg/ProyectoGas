@@ -1,0 +1,22 @@
+<pdf>
+	<dynamic-page>
+
+	 Fecha: {{ venta.fecha | date() }} <br>
+
+	-----Cliente-----<br>
+	Nombre: {{ cliente.nombre }}<br>
+	Apellidos: {{ cliente.apellido }}<br>
+	Direccion: {{ cliente.direccion }}<br>
+	-----Producto-----<br>
+	Cantidad: {{ venta.cantidad }}<br>
+	Credito: {{ venta.creditos ? 'Si':'No' }}<br>
+	Prestamo de Balon: {{ venta.prestamoBalon ? 'Si':'No' }}<br>
+	-----Usuario------<br>
+	{{ venta.usuarios.nombre }} {{ venta.usuarios.apellido }}
+
+
+    </dynamic-page>
+</pdf>
+<div>
+	<a href="{{ path('eticom_gas_inicio') }}">Inicio</a>
+</div>

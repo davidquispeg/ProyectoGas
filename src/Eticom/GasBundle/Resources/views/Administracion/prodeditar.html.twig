@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+{% block title%} Actualizar {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+			<h2> Editar </h2>
+			<form novalidate="novalidate" action="{{ path('administracion_producto_actualizar',{'id':producto.IdProductos}) }}" method="post" {{ form_enctype(formulario) }}>
+				{{ form_errors(formulario) }}
+				<div class="form-group">
+					{{ form_label(formulario.nombre) }}
+					{{ form_errors(formulario.nombre) }}
+					{{ form_widget(formulario.nombre,{'attr':{'class':'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(formulario.precio) }}
+					{{ form_errors(formulario.precio) }}
+					{{ form_widget(formulario.precio,{'attr':{'class':'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(formulario.proveedor) }}
+					{{ form_errors(formulario.proveedor) }}
+					{{ form_widget(formulario.proveedor,{'attr':{'class':'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(formulario.balonVacio) }}
+					{{ form_errors(formulario.balonVacio) }}
+					{{ form_widget(formulario.balonVacio,{'attr':{'class':'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(formulario.balonLleno) }}
+					{{ form_errors(formulario.balonLleno) }}
+					{{ form_widget(formulario.balonLleno,{'attr':{'class':'form-control'}}) }}
+				</div>
+				<div class="form-group">
+					{{ form_label(formulario.total) }}
+					{{ form_errors(formulario.total) }}
+					{{ form_widget(formulario.total,{'attr':{'class':'form-control'}}) }}
+				</div>
+				{{ form_rest(formulario) }}
+				<input class="btn btn-success" type="submit" value="Actualizar" >
+			</form>
+		</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+{% endblock %}

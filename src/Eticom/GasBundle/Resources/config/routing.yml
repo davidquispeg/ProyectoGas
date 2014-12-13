@@ -1,3 +1,45 @@
-eticom_gas_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EticomGasBundle:Default:index }
+eticom_gas_login:
+    pattern:  /login
+    defaults: { _controller: EticomGasBundle:Default:login }
+eticom_gas_inicio:
+    pattern:  /inicio/
+    defaults: { _controller: EticomGasBundle:Default:inicio }
+eticom_gas_venta:
+    pattern:  /venta/{cliente}/
+    defaults: { _controller: EticomGasBundle:Default:venta }
+eticom_gas_actualizarventa:
+    pattern: /actualizarventa/{idventa}
+    defaults: { _controller: EticomGasBundle:Default:actualizarventa }
+eticom_gas_nuevocliente:
+    pattern:  /nuevocliente
+    defaults: { _controller: EticomGasBundle:Default:nuevoc }
+eticom_gas_vercliente:
+    pattern: /vercliente/{idcliente}
+    defaults: { _controller: EticomGasBundle:Default:vercliente }
+eticom_gas_ticket:
+    pattern: /impticket/{cliente}
+    defaults: { _controller: EticomGasBundle:Default:ticket }
+
+eticom_gas_menucliente:
+    pattern: /menucliente
+    defaults: { _controller: EticomGasBundle:Default:menucliente }
+
+eticom_gas_deudacliente:
+    pattern: /deudacliente
+    defaults: { _controller: EticomGasBundle:Default:deudacliente }
+
+eticom_gas_todoscliente:
+    pattern: /clientes
+    defaults: { _controller: EticomGasBundle:Default:todoscliente }
+
+eticom_gas_reporteventas:
+    pattern: /reporteventas
+    defaults: { _controller: EticomGasBundle:Default:reporteventas }
+
+usuario_login:
+    path: /login
+    defaults: { _controller: EticomGasBundle:Default:login }
+usuario_login_check:
+    path: /login_check
+usuario_logout:
+    path: /logout

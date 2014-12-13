@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Formulario de acceso{% endblock %}
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <p><hr/></p>
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="page-header">
+                            <h3>Login</h3>
+                        </div>
+                        <form action="{{ path('usuario_login_check') }}" method="post">
+                            {% if error %}
+                                <div class="form-group has-error"><label class="control-label">Datos incorrectos</label></div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label>Usuario:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" ><span class="glyphicon glyphicon-user"></span></span>
+                                    <input type="text" name="_username" value="{{ last_username }}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>
+                                    <input type="password" name="_password" class="form-control" />
+                                </div>
+                                <hr/>
+                                <input type="submit" name="login" value="Acceder" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

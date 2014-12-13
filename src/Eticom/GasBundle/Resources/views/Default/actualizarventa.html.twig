@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+{% block title%} Actualizar Venta{% endblock %}
+{% block body %}
+
+	<h2> Editar Venta del Cliente </h2>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+				<form action="{{ path('eticom_gas_actualizarventa',{'idventa':venta.IdVentas}) }}" method="post" {{ form_enctype(formulario) }}>
+					{{ form_errors(formulario) }}
+					<h3>Cliente: {{ venta.cliente.nombre }} {{ venta.cliente.apellido }}</h3>					
+					<hr>
+					<div class="form-group">
+						{{ form_label(formulario.productos) }}
+						{{ form_errors(formulario.productos) }}
+						{{ form_widget(formulario.productos) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(formulario.monto) }}
+						{{ form_errors(formulario.monto) }}
+						{{ form_widget(formulario.monto,{'attr':{'class':'form-control'}}) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(formulario.cantidad) }}
+						{{ form_errors(formulario.cantidad) }}
+						{{ form_widget(formulario.cantidad,{'attr':{'class':'form-control'}}) }}
+					</div>
+					<div class="form-group checkbox">
+						{{ form_widget(formulario.creditos) }}
+						{{ form_label(formulario.creditos) }}
+						{{ form_errors(formulario.creditos) }}						
+					</div>
+					<div class="form-group checkbox">
+						{{ form_widget(formulario.prestamoBalon) }}
+						{{ form_label(formulario.prestamoBalon) }}
+						{{ form_errors(formulario.prestamoBalon) }}						
+					</div>
+					<div>
+					    {{ form_rest(formulario) }}
+				    </div>
+					<input type="submit" value="Actualizar" class="btn btn-success" >
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+
+{% endblock %}

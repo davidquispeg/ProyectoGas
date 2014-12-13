@@ -3,9 +3,10 @@ namespace Eticom\GasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="Eticom\GasBundle\Entity\ClienteRepository")
 * @ORM\Table(name="cliente")
 */
 class cliente
@@ -15,25 +16,29 @@ class cliente
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_cliente;
+	protected $id;
 
 	/**
 	* @ORM\Column(type="string", length=50)
+    * @Assert\NotBlank(message="Debes introducir un texto.")
 	*/
 	protected $apellido;
 
 	/**
 	* @ORM\Column(type="string", length=40)
+    * @Assert\NotBlank(message="Debes introducir un texto.")
 	*/
 	protected $nombre;
 
 	/**
 	* @ORM\Column(type="string", length=12)
+    * @Assert\NotBlank(message="Debes introducir un texto.")
 	*/
 	protected $celular;
 
 	/**
 	* @ORM\Column(type="string", length=255)
+    * @Assert\NotBlank(message="Debes introducir un texto.")
 	*/
 	protected $direccion;
 
@@ -61,7 +66,7 @@ class cliente
      */
     public function getIdCliente()
     {
-        return $this->id_cliente;
+        return $this->id;
     }
 
     /**

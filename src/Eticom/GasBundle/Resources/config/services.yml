@@ -2,6 +2,9 @@ parameters:
 #    eticom_gas.example.class: Eticom\GasBundle\Example
 
 services:
-#    eticom_gas.example:
-#        class: %eticom_gas.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    login_listener:
+        class:     Eticom\GasBundle\Listener\LoginListener
+        arguments: [@security.context, @router]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
+            - { name: kernel.event_listener, event: kernel.response }

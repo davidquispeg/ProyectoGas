@@ -14,7 +14,7 @@ class boleta
 	* @ORM\Id
 	* @ORM\Column(type="string")	
 	*/
-	protected $num_boleta;
+	protected $numBoleta;
 
 	/**
 	* @ORM\Column(type="float")
@@ -25,17 +25,17 @@ class boleta
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="cliente", inversedBy="boleta")
-	 * @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
+	 * @ORM\JoinColumn(name="id_cliente", referencedColumnName="id")
 	 */
 	protected $cliente;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="detalle_boleta", mappedBy="boleta")
+	 * @ORM\OneToMany(targetEntity="DetalleBoleta", mappedBy="boleta")
 	 */
-	protected $detalle_boleta;
+	protected $detalleBoleta;
 	public function __construct()
 	{
-		$this->detalle_boleta = new ArrayCollection();
+		$this->detalleBoleta = new ArrayCollection();
 	}
 
     /**
@@ -46,7 +46,7 @@ class boleta
      */
     public function setNumBoleta($numBoleta)
     {
-        $this->num_boleta = $numBoleta;
+        $this->numBoleta = $numBoleta;
 
         return $this;
     }
@@ -58,7 +58,7 @@ class boleta
      */
     public function getNumBoleta()
     {
-        return $this->num_boleta;
+        return $this->numBoleta;
     }
 
     /**
@@ -113,9 +113,9 @@ class boleta
      * @param \Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta
      * @return boleta
      */
-    public function addDetalleBoletum(\Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta)
+    public function addDetalleBoletum(\Eticom\GasBundle\Entity\DetalleBoleta $detalleBoleta)
     {
-        $this->detalle_boleta[] = $detalleBoleta;
+        $this->detalleBoleta[] = $detalleBoleta;
 
         return $this;
     }
@@ -125,9 +125,9 @@ class boleta
      *
      * @param \Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta
      */
-    public function removeDetalleBoletum(\Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta)
+    public function removeDetalleBoletum(\Eticom\GasBundle\Entity\DetalleBoleta $detalleBoleta)
     {
-        $this->detalle_boleta->removeElement($detalleBoleta);
+        $this->detalleBoleta->removeElement($detalleBoleta);
     }
 
     /**
@@ -137,6 +137,6 @@ class boleta
      */
     public function getDetalleBoleta()
     {
-        return $this->detalle_boleta;
+        return $this->detalleBoleta;
     }
 }

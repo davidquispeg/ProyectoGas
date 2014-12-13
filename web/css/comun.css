@@ -1,0 +1,45 @@
+
+h1 { 
+	font-size: 21px; 
+	margin-top: 0;	
+}
+#tablastock {
+	border: 1px solid #AAA collapse;
+	margin: 1em 0;
+	width: 20%;
+	float: right;
+	position: absolute; 
+	left: 50%;
+	top: 3em;
+}
+table tr, table th, table td {
+	border: 1px solid #AAA;
+	padding: .5em .2em;
+}
+a         { color: #2200C1; }
+a:visited { color: #2200C1; }
+a:hover   { color: #C06 !important; }
+a:active  { position: relative; top: 1px; }
+
+/* Formulario */
+
+form div.simple{
+	background-color: #F5F5F5;
+	border: 3px inset black;
+	margin: 8em 30em;
+	padding: 1em;	
+	width: 22%;	
+}
+form div.simple label{
+	margin-right: 4em;
+}
+form div{
+	margin: .4em 0;
+}
+form div label{
+	width: 6%;
+	float: left;
+}
+.logout{
+	float: right;
+}

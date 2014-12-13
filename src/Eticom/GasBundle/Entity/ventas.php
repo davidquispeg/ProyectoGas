@@ -2,9 +2,10 @@
 namespace Eticom\GasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="Eticom\GasBundle\Entity\VentaRepository")
 * @ORM\Table(name="ventas")
 */
 class ventas
@@ -14,7 +15,7 @@ class ventas
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	Protected $id_ventas;
+	Protected $id;
 
 	/**
 	* @ORM\Column(type="date")	
@@ -23,13 +24,23 @@ class ventas
 
 	/**
 	* @ORM\Column(type="float")
+    * @Assert\NotBlank()
+    * @Assert\Range(min=1,minMessage="Introducir valores mayores a cero",invalidMessage="El valor deberia ser un numero")
 	*/
 	Protected $monto;
 
+    /**
+    * @ORM\Column(type="integer")    
+    * @Assert\NotBlank(message="Debes introducir un valor")    
+    * @Assert\Range(min=1,minMessage="Introducir valores mayores a cero",invalidMessage="El valor deberia ser un numero")
+    */
+    Protected $cantidad;
+
 	/**
-	* @ORM\Column(type="string", length=40)
+    * @Assert\NotBlank(message="Debes introducir un valor.")
+	* @ORM\Column(type="string", length=10)    
 	*/
-	Protected $nro_ticket;
+    Protected $nroTicket;
 
 	/**
 	* @ORM\Column(type="boolean")
@@ -39,31 +50,31 @@ class ventas
 	/**
 	* @ORM\Column(type="boolean")
 	*/
-	Protected $prestamo_balon;
+	Protected $prestamoBalon;
 
 	//Creando las relaciones
 
 	/**
      * @ORM\ManyToOne(targetEntity="sucursal", inversedBy="ventas")
-     * @ORM\JoinColumn(name="id_sucursal", referencedColumnName="id_sucursal")
+     * @ORM\JoinColumn(name="id_sucursal", referencedColumnName="id")
      */
 	protected $sucursal;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="usuarios", inversedBy="ventas")
-	 * @ORM\JoinColumn(name="id_usuarios", referencedColumnName="id_usuario")
+	 * @ORM\JoinColumn(name="id_usuarios", referencedColumnName="id")
 	 */
 	protected $usuarios;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="cliente", inversedBy="ventas")
-	 * @ORM\JoinColumn(name="id_cliente", referencedColumnName="id_cliente")
+	 * @ORM\JoinColumn(name="id_cliente", referencedColumnName="id")
 	 */
 	protected $cliente;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="productos", inversedBy="ventas")
-	 * @ORM\JoinColumn(name="id_producto", referencedColumnName="id_productos")
+	 * @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
 	 */
 	protected $productos;
 
@@ -75,7 +86,7 @@ class ventas
      */
     public function getIdVentas()
     {
-        return $this->id_ventas;
+        return $this->id;
     }
 
     /**
@@ -132,7 +143,7 @@ class ventas
      */
     public function setNroTicket($nroTicket)
     {
-        $this->nro_ticket = $nroTicket;
+        $this->nroTicket = $nroTicket;
 
         return $this;
     }
@@ -144,7 +155,7 @@ class ventas
      */
     public function getNroTicket()
     {
-        return $this->nro_ticket;
+        return $this->nroTicket;
     }
 
     /**
@@ -178,7 +189,7 @@ class ventas
      */
     public function setPrestamoBalon($prestamoBalon)
     {
-        $this->prestamo_balon = $prestamoBalon;
+        $this->prestamoBalon = $prestamoBalon;
 
         return $this;
     }
@@ -190,7 +201,7 @@ class ventas
      */
     public function getPrestamoBalon()
     {
-        return $this->prestamo_balon;
+        return $this->prestamoBalon;
     }
 
     /**
@@ -283,5 +294,28 @@ class ventas
     public function getProductos()
     {
         return $this->productos;
+    }
+
+    /**
+     * Set cantidad
+     *
+     * @param integer $cantidad
+     * @return ventas
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+
+        return $this;
+    }
+
+    /**
+     * Get cantidad
+     *
+     * @return integer 
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
     }
 }

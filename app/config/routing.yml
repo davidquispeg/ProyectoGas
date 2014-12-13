@@ -1,6 +1,9 @@
 eticom_gas:
     resource: "@EticomGasBundle/Resources/config/routing.yml"
     prefix:   /
+administracion:
+    resource: "@EticomGasBundle/Resources/config/administracion/routing.yml"
+    prefix:   /admin
 
 
 

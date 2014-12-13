@@ -15,7 +15,7 @@ class proveedor
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_proveedor;
+	protected $id;
 
 	/**
 	* @ORM\Column(type="string")	
@@ -50,7 +50,7 @@ class proveedor
      */
     public function getIdProveedor()
     {
-        return $this->id_proveedor;
+        return $this->id;
     }
 
     /**
@@ -153,5 +153,9 @@ class proveedor
     public function getProductos()
     {
         return $this->productos;
+    }
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }

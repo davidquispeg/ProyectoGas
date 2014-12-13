@@ -3,6 +3,7 @@ namespace Eticom\GasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -15,29 +16,49 @@ class productos
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_productos;
+	protected $id;
 
 	/**
-	* @ORM\Column(type="string", length=50)	
+	* @ORM\Column(type="string", length=50)
+    * @Assert\NotBlank(message="Debes introducir un texto.")
+    * 
 	*/
 	protected $nombre;
 
 	/**
 	* @ORM\Column(type="float")
+    * @Assert\NotBlank(message="Debes introducir un valor.")
+    * @Assert\Range(min=0, minMessage="Introduce valores positivos.")
 	*/
 	protected $precio;
 
 	/**
 	* @ORM\Column(type="integer")
+    * @Assert\NotBlank(message="Debes introducir un valor.")
+    * @Assert\Range(min=0, minMessage="Introduce valores positivos.")
 	*/
-	protected $cantidad;
+	protected $total;
+
+    /**
+    * @ORM\Column(type="integer")
+    * @Assert\NotBlank(message="Debes introducir un valor.")
+    * @Assert\Range(min=0, minMessage="Introduce valores positivos.")
+    */
+    protected $balonVacio;
+
+    /**
+    * @ORM\Column(type="integer")
+    * @Assert\NotBlank(message="Debes introducir un valor.")
+    * @Assert\Range(min=0, minMessage="Introduce valores positivos.")
+    */
+    protected $balonLleno;
 
 	//Creando las relaciones//
 
 	/**
-	 * @ORM\OneToMany(targetEntity="detalle_boleta", mappedBy="productos")
+	 * @ORM\OneToMany(targetEntity="DetalleBoleta", mappedBy="productos")
 	 */
-	protected $detalle_boleta;
+	protected $detalleBoleta;
 	
 
 	/**
@@ -52,14 +73,14 @@ class productos
 	public function __construct()
 	{
 		$this->compras = new ArrayCollection();
-		$this->detalle_boleta = new ArrayCollection();
+		$this->detalleBoleta = new ArrayCollection();
 		$this->ventas = new ArrayCollection();
 	}
 
 	//Relacion Muchos a Uno//
 	/**
 	 * @ORM\ManyToOne(targetEntity="proveedor", inversedBy="productos")
-	 * @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id_proveedor")
+	 * @ORM\JoinColumn(name="id_proveedor", referencedColumnName="id")
 	*/
 	protected $proveedor;
 
@@ -71,7 +92,7 @@ class productos
      */
     public function getIdProductos()
     {
-        return $this->id_productos;
+        return $this->id;
     }
 
     /**
@@ -126,9 +147,9 @@ class productos
      * @param integer $cantidad
      * @return productos
      */
-    public function setCantidad($cantidad)
+    public function setTotal($total)
     {
-        $this->cantidad = $cantidad;
+        $this->total = $total;
 
         return $this;
     }
@@ -138,9 +159,31 @@ class productos
      *
      * @return integer 
      */
-    public function getCantidad()
+    public function getTotal()
     {
-        return $this->cantidad;
+        return $this->total;
+    }
+
+    public function getBalonVacio()
+    {
+        return $this->balonVacio;
+    }
+
+    public function setBalonVacio($balonVacio)
+    {
+        $this->balonVacio = $balonVacio;
+        return $this;
+    }
+
+    public function getBalonLleno()
+    {
+        return $this->balonLleno;
+    }
+
+    public function setBalonLleno($balonLleno)
+    {
+        $this->balonLleno = $balonLleno;
+        return $this;
     }
 
     /**
@@ -149,9 +192,9 @@ class productos
      * @param \Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta
      * @return productos
      */
-    public function addDetalleBoletum(\Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta)
+    public function addDetalleBoletum(\Eticom\GasBundle\Entity\DetalleBoleta $detalleBoleta)
     {
-        $this->detalle_boleta[] = $detalleBoleta;
+        $this->detalleBoleta[] = $detalleBoleta;
 
         return $this;
     }
@@ -161,9 +204,9 @@ class productos
      *
      * @param \Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta
      */
-    public function removeDetalleBoletum(\Eticom\GasBundle\Entity\detalle_boleta $detalleBoleta)
+    public function removeDetalleBoletum(\Eticom\GasBundle\Entity\DetalleBoleta $detalleBoleta)
     {
-        $this->detalle_boleta->removeElement($detalleBoleta);
+        $this->detalleBoleta->removeElement($detalleBoleta);
     }
 
     /**
@@ -173,7 +216,7 @@ class productos
      */
     public function getDetalleBoleta()
     {
-        return $this->detalle_boleta;
+        return $this->detalleBoleta;
     }
 
     /**
@@ -263,5 +306,10 @@ class productos
     public function getProveedor()
     {
         return $this->proveedor;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }

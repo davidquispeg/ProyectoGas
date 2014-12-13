@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+{% block title %}Reporte de Ventas{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+            
+        <div class="col-md-4">
+            <div class="jumbotron">
+                <form action="{{ path('eticom_gas_reporteventas') }}" method="post" {{ form_enctype(form) }}>
+                    {{ form_errors(form) }}
+                    <div>
+                        <h3>Periodo</h3>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.fechainicio) }}
+                        {{ form_errors(form.fechainicio) }}
+                        {{ form_widget(form.fechainicio) }}                    
+                    </div>
+                    <div class="form-group">
+                      	{{ form_label(form.fechafinal) }}
+                      	{{ form_errors(form.fechafinal) }}
+                       	{{ form_widget(form.fechafinal) }}
+                    </div>
+                    <hr>
+                    <div>
+                        <h3>Producto</h3>
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.todos,{ 'attr':{'class':'form-radio'} }) }}
+                      	{{ form_label(form.todos) }}
+                       	{{ form_errors(form.todos) }}
+                        	
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.producto) }}
+                        {{ form_errors(form.producto) }}
+                        {{ form_widget(form.producto) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    <input type="submit" value="Generar" class="btn btn-success">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-primary" href="{{ path('administracion_principal') }}">Inicio</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('eticom_gas_inicio') }}">Inicio</a>
+                    {% endif %}                    
+                </form>
+            </div>
+        </div>            
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

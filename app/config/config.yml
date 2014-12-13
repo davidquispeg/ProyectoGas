@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: "@EticomGasBundle/Resources/config/services.yml" }
 
 framework:
     #esi:             ~
@@ -67,3 +68,16 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+#pdf
+ps_pdf:
+    nodes_file: ~
+    fonts_file: ~
+    complex_attributes_file: ~
+    colors_file: ~
+    use_cache_in_stylesheet: ~
+    cache:
+      type: ~
+      options: ~
+    markdown_stylesheet_filepath: ~
+    markdown_document_template_filepath: ~
+    document_parser_type: ~

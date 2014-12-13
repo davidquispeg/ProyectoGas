@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+{% block title %} Registro de usuario {% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="jumbotron">
+				<form action="{{ path('usuario_registro') }}" method="post" {{ form_enctype(formulario) }} >
+					{{ form_errors(formulario) }}
+					<div class="form-group">
+						<fieldset>
+							<legend>Datos personales</legend>
+							{{ form_label(formulario.nombre) }}
+							{{ form_errors(formulario.nombre) }}
+							{{ form_widget(formulario.nombre,{ 'attr':{ 'class':'form-control' }}) }}
+							{{ form_label(formulario.apellido) }}
+							{{ form_errors(formulario.apellido) }}
+							{{ form_widget(formulario.apellido,{ 'attr':{ 'class':'form-control' }}) }}								
+						</fieldset>
+					</div>					
+						<fieldset>
+							<legend>Datos de usuario</legend>
+							<div class="form-group">
+								{{ form_label(formulario.usuario) }}
+								{{ form_errors(formulario.usuario) }}
+								{{ form_widget(formulario.usuario,{ 'attr':{ 'class':'form-control' }}) }}
+							</div>
+
+							<div class="form-group">
+								{{ form_errors(formulario.password) }}
+								{{ form_widget(formulario.password) }}
+							</div>
+							<div class="form-group">								
+								{{ form_label(formulario.rol) }}
+								{{ form_errors(formulario.rol) }}
+								{{ form_widget(formulario.rol,{ 'attr':{ 'class':'form-control' }}) }}
+							</div>
+						</fieldset>					
+					{{ form_rest(formulario) }}
+					<input type="submit" value="Registrar" class="btn btn-success" />
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+{% endblock %}

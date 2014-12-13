@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+{% block title%} Reporte de Ventas{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="center-block">
+		<h2>Reporte de Ventas</h2>
+	</div>
+	<table class="table table-hover">
+		<tr>
+			<th>Fecha</th>
+			<th>N°Ticket</th>
+			<th>Cliente</th>
+			<th>Producto</th>
+			<th>Precio</th>
+			<th>Cantidad</th>
+			<th>Total</th>
+		</tr>
+		{% set total = 0 %}
+		{% for v in ventas %}	
+		<tr>
+		    <td>{{ v.fecha | date() }}</td>
+		    <td>{{ v.nroTicket }}</td>
+		    <td>{{ v.cliente.nombre }} {{ v.cliente.apellido }}</td>
+		    <td>{{ v.productos.nombre }}</td>
+		    <td>S/.{{ v.monto }}</td>
+		    <td>{{ v.cantidad }}</td>
+		    <td>S/.{{ v.monto * v.cantidad }} </td>
+		    {% set total = total + (v.monto * v.cantidad) %}
+		</tr>	
+		{% endfor %}
+		<tr class="success">
+			<td></td><td></td><td></td><td></td><td></td><td></td>
+			<td>Total:S/.{{ total }} </td>
+		</tr>
+	</table>
+		<a class="glyphicon glyphicon-arrow-left btn btn-primary" href="{{ path('eticom_gas_reporteventas') }}"> Regresar</a>
+</div>
+{% endblock %}

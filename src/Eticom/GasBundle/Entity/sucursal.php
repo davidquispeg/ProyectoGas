@@ -15,7 +15,7 @@ class sucursal
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_sucursal;
+	protected $id;
 
 	/**
 	* @ORM\Column(type="string", length=40)
@@ -30,7 +30,7 @@ class sucursal
 	/**
 	* @ORM\Column(type="string", length=255)
 	*/
-	protected $razon_social;
+	protected $razonSocial;
 
 	/**
 	* @ORM\Column(type="string", length=15)
@@ -40,12 +40,12 @@ class sucursal
 	/**
 	* @ORM\Column(type="string", length=30)
 	*/
-	protected $serie_impresora;
+	protected $serieImpresora;
 
 	/**
 	* @ORM\Column(type="string", length=40)
 	*/
-	protected $nro_ticket;
+	protected $nroTicket;
 
 	//Creando las relaciones//
 
@@ -65,7 +65,7 @@ class sucursal
      */
     public function getIdSucursal()
     {
-        return $this->id_sucursal;
+        return $this->id;
     }
 
     /**
@@ -122,7 +122,7 @@ class sucursal
      */
     public function setRazonSocial($razonSocial)
     {
-        $this->razon_social = $razonSocial;
+        $this->razonSocial = $razonSocial;
 
         return $this;
     }
@@ -134,7 +134,7 @@ class sucursal
      */
     public function getRazonSocial()
     {
-        return $this->razon_social;
+        return $this->razonSocial;
     }
 
     /**
@@ -168,7 +168,7 @@ class sucursal
      */
     public function setSerieImpresora($serieImpresora)
     {
-        $this->serie_impresora = $serieImpresora;
+        $this->serieImpresora = $serieImpresora;
 
         return $this;
     }
@@ -180,7 +180,7 @@ class sucursal
      */
     public function getSerieImpresora()
     {
-        return $this->serie_impresora;
+        return $this->serieImpresora;
     }
 
     /**
@@ -191,7 +191,7 @@ class sucursal
      */
     public function setNroTicket($nroTicket)
     {
-        $this->nro_ticket = $nroTicket;
+        $this->nroTicket = $nroTicket;
 
         return $this;
     }
@@ -203,7 +203,7 @@ class sucursal
      */
     public function getNroTicket()
     {
-        return $this->nro_ticket;
+        return $this->nroTicket;
     }
 
     /**

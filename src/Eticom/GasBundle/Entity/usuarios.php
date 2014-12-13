@@ -3,19 +3,32 @@ namespace Eticom\GasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
 * @ORM\Entity
 * @ORM\Table(name="usuarios")
 */
-class usuarios
+class usuarios implements UserInterface
 {
+    function eraseCredentials()
+    {
+
+    }
+    function getRoles()
+    {
+        return array($this->getRol());
+    }
+    function getUsername()
+    {
+        return $this->getUsuario();
+    }
 	/**
 	* @ORM\Id
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $id_usuario;
+	protected $id;
 
 	/**
 	* @ORM\Column(type="string", length=50)
@@ -33,9 +46,19 @@ class usuarios
 	protected $usuario;
 
 	/**
-	* @ORM\Column(type="string", length=20)
+	* @ORM\Column(type="string")
 	*/
-	protected $clave;
+	protected $password;
+
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $salt;
+
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $rol;
 
 	//Creando las relaciones//
 
@@ -55,7 +78,7 @@ class usuarios
      */
     public function getIdUsuario()
     {
-        return $this->id_usuario;
+        return $this->id;
     }
 
     /**
@@ -133,9 +156,9 @@ class usuarios
      * @param string $clave
      * @return usuarios
      */
-    public function setClave($clave)
+    public function setPassword($password)
     {
-        $this->clave = $clave;
+        $this->password = $password;
 
         return $this;
     }
@@ -145,9 +168,28 @@ class usuarios
      *
      * @return string 
      */
-    public function getClave()
+    public function getPassword()
     {
-        return $this->clave;
+        return $this->password;
+    }
+
+    public function setsalt($salt)
+    {
+        $this->salt = $salt;
+        return $this;
+    }
+    public function getsalt()
+    {
+        return $this->salt;
+    }
+    public function getRol()
+    {
+        return $this->rol;
+    }
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+        return $this;
     }
 
     /**
@@ -181,5 +223,9 @@ class usuarios
     public function getVentas()
     {
         return $this->ventas;
+    }
+    public function __toString()
+    {
+        return $this->getNombre().' '.$this->getApellido();
     }
 }

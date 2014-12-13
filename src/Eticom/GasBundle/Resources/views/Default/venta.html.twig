@@ -1,0 +1,74 @@
+{% extends '::base.html.twig' %}
+{% block title %} VENTAS {% endblock %}
+{% block body %}
+<div class="container">
+    <h2 class="text-center">Venta de Gas</h2>
+    <div class="row">
+        <div class="col-md-6">            
+            <form novalidate="novalidate" action = "{{ path('eticom_gas_venta',{ 'cliente':cliente.idCliente }) }}" method="post" {{ form_enctype(form) }} >
+                {{ form_errors(form) }}
+                <div class="form-group">
+                    <div>
+                        <h3>Cliente: <a href="{{ path('eticom_gas_vercliente',{'idcliente':cliente.idCliente })}}">{{ cliente.apellido }} {{ cliente.nombre }}</a></h3>
+                    </div>
+                    <div>
+                        {{ form_label(form.productos,'Tipo de Gas') }}
+                        {{ form_errors(form.productos) }}
+                        {{ form_widget(form.productos,{ 'attr': {'class':'form-control'}}) }}            
+                    </div>
+                    <div>
+                        {{ form_label(form.nroTicket) }}                        
+                        {{ form_errors(form.nroTicket) }}
+                        {{ form_widget(form.nroTicket,{ 'attr': {'class':'form-control'}}) }}            
+                    </div>
+                    <div>
+                        {{ form_label(form.monto) }}
+                        {{ form_errors(form.monto) }}
+                        {{ form_widget(form.monto,{ 'attr': {'class':'form-control'}}) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.cantidad) }}
+                        {{ form_errors(form.cantidad) }}
+                        {{ form_widget(form.cantidad,{ 'attr': {'class':'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        {{ form_errors(form.creditos) }}
+                        {{ form_widget(form.creditos) }}
+                        {{ form_label(form.creditos) }}            
+                    </div>
+                    <div class="checkbox">
+                        {{ form_errors(form.prestamoBalon) }}
+                        {{ form_widget(form.prestamoBalon) }}
+                        {{ form_label(form.prestamoBalon) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    
+                    <input type="submit" value="Emitir Ticket" class="btn btn-success"/>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-primary" href="{{ path('administracion_principal') }}">Inicio</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('eticom_gas_inicio') }}">Inicio</a>
+                    {% endif %}
+                </div>       
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <caption>STOCK</caption>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                </tr>
+                {% for p in producto %}
+                <tr>
+                    <td> {{ p.nombre }}</td>
+                    <td> {{ p.balonLleno }}</td>            
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

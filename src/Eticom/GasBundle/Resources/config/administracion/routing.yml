@@ -1,0 +1,29 @@
+administracion_principal:
+    path: /
+    defaults: { _controller: EticomGasBundle:Administracion:principal }
+administracion_producto_nuevo:
+    path: /producto/nuevo
+    defaults: { _controller: EticomGasBundle:Administracion:productoNuevo }
+administracion_producto_actualizar:
+    path: /producto/actualizar/{id}
+    defaults: { _controller: EticomGasBundle:Administracion:productoActualizar }
+administracion_producto_stock:
+    path: /producto/stock
+    defaults: { _controller: EticomGasBundle:Administracion:stock }
+administracion_ventas:
+    path: /ventas
+    defaults: { _controller: EticomGasBundle:Administracion:ventas }
+administracion_usuarios:
+    path: /usuario
+    defaults: { _controller: EticomGasBundle:Administracion:usuarios }
+administracion_eliminar_usuario:
+    path: /usuario/{id}
+    defaults: { _controller: EticomGasBundle:Administracion:eliminaUsuario }
+administracion_usuario_registro:
+    path: /registro
+    defaults: { _controller: EticomGasBundle:Administracion:registro }
+
+usuario_logout:
+    path: /logout
+
+

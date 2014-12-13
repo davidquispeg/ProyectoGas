@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+{% block title %}Productos{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Clientes que deben balones <a class="btn btn-success" href="{{ path('eticom_gas_menucliente')}}">Menu clientes</a></h2>
+			<table class="table table-hover">
+				<tr>
+					<th>Nombres y Apellidos</th>
+				</tr>
+				{% set clibalon = "" %}
+				{% for b in balon %}    
+				    {% if b.cliente.nombre != clibalon %}
+				        <tr><td><a href="{{ path('eticom_gas_vercliente',{'idcliente':b.cliente.IdCliente}) }}">{{ b.cliente.nombre }} {{ b.cliente.apellido }}</a></td></tr>
+				    {% endif %}
+				    {% set clibalon = b.cliente.nombre %}
+				{% endfor %}					
+			</table>
+		</div>
+		<div class="col-md-6">
+			<h2>Clientes que deben Dinero</h2>
+			<table class="table table-hover">
+				<tr>
+					<th>Nombres y Apellidos</th>
+				</tr>
+				{% set clidinero = "" %}
+				{% for p in prestamo %}
+				    {% if p.cliente.nombre != clidinero %}
+				        <tr><td><a href="{{ path('eticom_gas_vercliente',{'idcliente':p.cliente.IdCliente}) }}">{{ p.cliente.nombre }} {{ p.cliente.apellido}}</a></td></tr>
+				    {% endif %}
+				    {% set clidinero = p.cliente.nombre %}
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

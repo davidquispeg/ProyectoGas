@@ -1,0 +1,128 @@
+<?php
+
+namespace Eticom\GasBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Eticom\GasBundle\Entity\cliente;
+use Eticom\GasBundle\Entity\ventas;
+use Eticom\GasBundle\Entity\productos;
+use Eticom\GasBundle\Form\clienteType;
+use Eticom\GasBundle\Form\VentaType;
+
+class DefaultController extends Controller
+{
+    public function indexAction($name)
+    {
+        return $this->render('EticomGasBundle:Default:index.html.twig', array('name' => $name));
+    }
+
+    public function menuAction()
+    {
+        return $this->render('EticomGasBundle:Default:menu.html.twig');
+    }
+    public function loginAction(Request $request)
+    {
+    	$form = $this->createFormBuilder()
+    	    ->add('usuario','text')
+    	    ->add('clave','password')
+            ->add('edad','integer')
+    	    ->add('Ingresar','submit')
+    	    ->getForm();
+        $form->handleRequest($request);//detecta si se envio o no el formulario
+        if ($form->isValid())
+        {
+            return $this->render('EticomGasBundle:Default:menu.html.twig',array('formu'=>$form->getData()));
+
+        }
+    	return $this->render('EticomGasBundle:Default:login.html.twig',array('form'=>$form->createView()));
+    }
+    public function ventaAction(Request $request)
+    {
+        $ventas = new ventas();
+        $cliente = new cliente();
+        $form = $this->createFormBuilder()
+            ->add('celular','text')
+            ->add('buscar','submit')
+            ->add('registrar','submit')
+            ->getForm();
+        $ventas->setFecha(new \DateTime("now"));
+        $ventas->setMonto(40);
+        $ventas->setPrestamoBalon(false);
+        $ventas->setCreditos(false);
+        $ventas->setNroTicket('00001');
+        $ventas->setCliente($cliente->getIdCliente());
+
+        $form1 = $this->createForm(new VentaType(),$ventas);
+            
+        $form->handleRequest($request);
+        $form1->handleRequest($request);
+        $bbuscar = $form->get('buscar')->isClicked();
+        $imprimir = $form1->get('imprimir')->isClicked();
+        $nuevo = $form->get('registrar')->isClicked();
+        if ($bbuscar)
+        {
+            $celular = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery(
+                'select c from EticomGasBundle:cliente c 
+                where c.celular = :celular'
+                )->setParameter('celular',$celular['celular']);
+            $clienteform = $query->getResult();
+            if ($clienteform)
+            {
+                echo "Usuario registrado:";
+                foreach ($clienteform as $value) 
+                {
+                    echo $value->getNombre()." ".$value->getApellido();
+                    $id = $value->getIdCliente();
+                }
+            }
+            else
+            {
+                echo "No se encuentra registrado";
+            }
+        }
+        if ($nuevo)
+        {
+            return $this->redirect($this->generateUrl('eticom_gas_nuevocliente'));
+        }
+        //if($imprimir)
+        if($form1->isValid())
+        {
+            $cant = $form1->getData();
+            //$producto = new productos();
+            $em = $this->getDoctrine()->getManager();
+            //$em->persist($producto);
+            $em->persist($ventas);
+            $em->flush();
+            //$em->createQuery(
+            //    "update EticomGasBundle:productos p set p.total = p.total - :cantidad
+            //    where p.id_productos = 1")->setParameter('cantidad',$cant['cantidad']);
+            return $this->redirect($this->generateUrl('eticom_gas_mostrarventa'));
+        }
+        return $this->render('EticomGasBundle:Default:venta.html.twig',array('form'=>$form->createView(),'form1'=>$form1->createView()));        
+    }
+    public function nuevocAction(Request $request)
+    {
+        $cliente = new cliente();
+        $form = $this->createForm(new ClienteType(),$cliente);
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($cliente);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('eticom_gas_venta'));
+        }
+        return $this->render('EticomGasBundle:Default:nuevocliente.html.twig',array('form'=>$form->createView()));
+    }
+    public function mostrarvAction()
+    {
+        $repositorio = $this->getDoctrine()->getRepository('EticomGasBundle:ventas');
+        $ventas = $repositorio->findAll();
+        return $this->render('EticomGasBundle:Default:mostrarventa.html.twig',array('ventas'=>$ventas));
+    }
+} 
