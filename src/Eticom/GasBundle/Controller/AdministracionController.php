@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContext;
 use Eticom\GasBundle\Form\ProductoType;
 use Eticom\GasBundle\Entity\productos;
+use Eticom\GasBundle\Entity\usuarios;
+use Eticom\GasBundle\Form\UsuarioType;
 
 class AdministracionController extends Controller
 {

@@ -1,7 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends  is_granted('ROLE_ADMIN') ? '::admin.html.twig' : '::frontend.html.twig' %}
 {% block title%} Actualizar Venta{% endblock %}
 {% block body %}
-
+{{ parent() }}
 	<h2> Editar Venta del Cliente </h2>
 
 <div class="container">

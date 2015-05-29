@@ -1,5 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 {% block body %}
+{{ parent() }}
 <div class="container">
 	<div class="row">
 		
@@ -16,7 +17,9 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">CLIENTES</div>				
 				<div class="list-group">
-					<a class="list-group-item" href="{{ path('eticom_gas_menucliente') }}">Ir al Menu de clientes</a>					
+					<a class="list-group-item" href="{{ path('eticom_gas_todoscliente') }}">Mostrar todos los clientes</a>
+					<a class="list-group-item" href="{{ path('eticom_gas_nuevocliente') }}">Registrar clientes</a>
+					<a class="list-group-item" href="{{ path('eticom_gas_deudacliente') }}">Mostrar clientes con deuda</a>
 				</div>
 			</div>
 			<div class="panel panel-primary">
@@ -35,9 +38,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-3">
-			<a href="{{ path('usuario_logout') }}">Cerrar Sesion</a>
-		</div>
+		<div class="col-md-3"></div>
 	</div>
 </div>
 {% endblock %}

@@ -131,10 +131,7 @@ class DefaultController extends Controller
         $cliente = $em->getRepository('EticomGasBundle:cliente')->find($idcliente);
         return $this->render('EticomGasBundle:Default:vercliente.html.twig',array('venta'=>$venta,'cliente'=>$cliente));
     }
-    public function menuclienteAction()
-    {
-        return $this->render('EticomGasBundle:Default:menucliente.html.twig');
-    }
+    
     public function deudaclienteAction()
     {
         $em = $this->getDoctrine()->getManager();        

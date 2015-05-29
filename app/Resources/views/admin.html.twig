@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+
+<nav class="navbar navbar-inverse" role="navigation">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Desplegar navegacion</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#"> Admin </a>
+	</div>
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="{{ path('administracion_principal') }}">Inicio</a></li>
+			<li><a href="{{ path('eticom_gas_inicio') }}">Venta</a></li>
+			<li><a href="{{ path('eticom_gas_reporteventas') }}">Reportes</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Clientes <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="{{ path('eticom_gas_nuevocliente') }}">Añadir</a></li>
+					<li><a href="{{ path('eticom_gas_todoscliente') }}">Mostrar</a></li>
+					<li><a href="{{ path('eticom_gas_deudacliente') }}">Deuda</a></li>					
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Producto <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="{{ path('administracion_producto_nuevo') }}">Nuevo</a></li>					
+					<li><a href="{{ path('administracion_producto_stock') }}">Stock</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Usuarios <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="{{ path('administracion_usuario_registro') }}">Registrar</a></li>					
+					<li><a href="{{ path('administracion_usuarios') }}">Todos</a></li>
+				</ul>
+			</li>
+		</ul>
+		<p class="navbar-text navbar-right"><a href="{{ path('usuario_logout') }}" class="navbar-link">Cerrar Sesion</a></p>
+	</div>
+</nav>
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+{% endblock %}

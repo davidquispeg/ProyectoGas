@@ -4,6 +4,7 @@ namespace Eticom\GasBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -32,16 +33,19 @@ class usuarios implements UserInterface
 
 	/**
 	* @ORM\Column(type="string", length=50)
+    * @Assert\NotBlank(message = "Por favor, ingrese su apellido.")
 	*/
 	protected $apellido;
 
 	/**
 	* @ORM\Column(type="string", length=40)
+    * @Assert\NotBlank(message = "Por favor, ingrese su nombre.")
 	*/
 	protected $nombre;
 
 	/**
 	* @ORM\Column(type="string", length=20)
+    * @Assert\NotBlank(message="Ingrese su denominacion de usuario.")
 	*/
 	protected $usuario;
 

@@ -20,7 +20,7 @@ class productos
 
 	/**
 	* @ORM\Column(type="string", length=50)
-    * @Assert\NotBlank(message="Debes introducir un texto.")
+    * @Assert\NotBlank(message = "Debes introducir un texto.")
     * 
 	*/
 	protected $nombre;

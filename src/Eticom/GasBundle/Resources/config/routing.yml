@@ -20,10 +20,6 @@ eticom_gas_ticket:
     pattern: /impticket/{cliente}
     defaults: { _controller: EticomGasBundle:Default:ticket }
 
-eticom_gas_menucliente:
-    pattern: /menucliente
-    defaults: { _controller: EticomGasBundle:Default:menucliente }
-
 eticom_gas_deudacliente:
     pattern: /deudacliente
     defaults: { _controller: EticomGasBundle:Default:deudacliente }

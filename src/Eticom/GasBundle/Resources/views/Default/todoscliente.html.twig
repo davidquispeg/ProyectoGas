@@ -1,23 +1,32 @@
-{% extends '::base.html.twig' %}
+{% extends  is_granted('ROLE_ADMIN') ? '::admin.html.twig' : '::frontend.html.twig' %}
 {% block title %} VENTAS {% endblock %}
 {% block body %}
-    <h2>Listado de Clientes <a class="btn btn-success" href="{{ path('eticom_gas_menucliente')}}">Menu clientes</a></h2>
-    <table class="table table-striped">
-    	<tr>
-    		<th>Nombre</th>
-    		<th>Apellidos</th>
-    		<th>Telefono</th>
-    		<th>Direccion</th>
-    		<th>Detalle de Compras</th>
-    	</tr>
-    	{% for c in clientes %}
-    	<tr>
-    		<td>{{ c.nombre }}</td>
-    		<td>{{ c.apellido }}</td>
-    		<td>{{ c.celular }}</td>
-    		<td>{{ c.direccion }}</td>
-    		<td><a href="{{ path('eticom_gas_vercliente',{'idcliente':c.IdCliente}) }}">Ver Compras</a></td>
-    	</tr>
-    	{% endfor %}
-    </table>
+{{ parent() }}
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <h2>Listado de Clientes </h2>
+            <table class="table table-striped">
+            	<tr>
+            		<th>Nombre</th>
+            		<th>Apellidos</th>
+            		<th>Telefono</th>
+            		<th>Direccion</th>
+            		<th>Detalle de Compras</th>
+            	</tr>
+            	{% for c in clientes %}
+            	<tr>
+            		<td>{{ c.nombre }}</td>
+            		<td>{{ c.apellido }}</td>
+            		<td>{{ c.celular }}</td>
+            		<td>{{ c.direccion }}</td>
+            		<td><a href="{{ path('eticom_gas_vercliente',{'idcliente':c.IdCliente}) }}">Ver Compras</a></td>
+            	</tr>
+            	{% endfor %}
+            </table>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
 {% endblock %}

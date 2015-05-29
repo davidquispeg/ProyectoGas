@@ -1,6 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 {% block title%} Actualizar {% endblock %}
 {% block body %}
+{{ parent() }}
 <div class="container">
 	<div class="row">
 		<div class="col-md-3"></div>
@@ -11,32 +12,44 @@
 				{{ form_errors(formulario) }}
 				<div class="form-group">
 					{{ form_label(formulario.nombre) }}
-					{{ form_errors(formulario.nombre) }}
+					{% if form_errors(formulario.nombre) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.nombre) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.nombre,{'attr':{'class':'form-control'}}) }}
 				</div>
 				<div class="form-group">
 					{{ form_label(formulario.precio) }}
-					{{ form_errors(formulario.precio) }}
+					{% if form_errors(formulario.precio) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.precio) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.precio,{'attr':{'class':'form-control'}}) }}
 				</div>
 				<div class="form-group">
 					{{ form_label(formulario.proveedor) }}
-					{{ form_errors(formulario.proveedor) }}
+					{% if form_errors(formulario.proveedor) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.proveedor) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.proveedor,{'attr':{'class':'form-control'}}) }}
 				</div>
 				<div class="form-group">
 					{{ form_label(formulario.balonVacio) }}
-					{{ form_errors(formulario.balonVacio) }}
+					{% if form_errors(formulario.balonVacio) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.balonVacio) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.balonVacio,{'attr':{'class':'form-control'}}) }}
 				</div>
 				<div class="form-group">
 					{{ form_label(formulario.balonLleno) }}
-					{{ form_errors(formulario.balonLleno) }}
+					{% if form_errors(formulario.balonLleno) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.balonLleno) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.balonLleno,{'attr':{'class':'form-control'}}) }}
 				</div>
 				<div class="form-group">
 					{{ form_label(formulario.total) }}
-					{{ form_errors(formulario.total) }}
+					{% if form_errors(formulario.total) %}
+						<div class="alert alert-danger">{{ form_errors(formulario.total) }}</div>
+					{% endif %}
 					{{ form_widget(formulario.total,{'attr':{'class':'form-control'}}) }}
 				</div>
 				{{ form_rest(formulario) }}

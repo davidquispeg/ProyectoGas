@@ -10,9 +10,6 @@ administracion_producto_actualizar:
 administracion_producto_stock:
     path: /producto/stock
     defaults: { _controller: EticomGasBundle:Administracion:stock }
-administracion_ventas:
-    path: /ventas
-    defaults: { _controller: EticomGasBundle:Administracion:ventas }
 administracion_usuarios:
     path: /usuario
     defaults: { _controller: EticomGasBundle:Administracion:usuarios }

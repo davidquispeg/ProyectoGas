@@ -1,9 +1,9 @@
-{% extends '::base.html.twig' %}
-{% block body %}
+{% extends  is_granted('ROLE_ADMIN') ? '::admin.html.twig' : '::frontend.html.twig' %}
 
+{% block body %}
+{{ parent() }}
 <div class="container">
-	<div class="row">
-		<p><hr/></p>
+	<div class="row">		
 		<div class="col-md-4"></div>
 		<div class="col-md-4">			
 			<form action = "{{ path('eticom_gas_inicio') }}" method="post" {{ form_enctype(formulario) }}>
@@ -26,17 +26,8 @@
 					</div>
 				</div>
 			</form>			
-			
-			<div>
-				<a class="btn btn-primary" href="{{ path('eticom_gas_menucliente') }}">Clientes</a>
-				<a class="btn btn-primary" href="{{ path('eticom_gas_reporteventas') }}">Reportes</a>
-				<a href="{{ path('usuario_logout') }}">Cerrar Sesion</a>
-			</div>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
 </div>
-
 {% endblock %}
-
-

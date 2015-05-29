@@ -1,30 +1,39 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 {% block title %} Registro de usuario {% endblock %}
 
 {% block body %}
+{{ parent() }}
 <div class="container">
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<div class="jumbotron">
-				<form action="{{ path('usuario_registro') }}" method="post" {{ form_enctype(formulario) }} >
+				<form novalidate="novalidate" action="{{ path('administracion_usuario_registro') }}" method="post" {{ form_enctype(formulario) }} >
 					{{ form_errors(formulario) }}
+					
+					<legend>Datos personales</legend>
 					<div class="form-group">
-						<fieldset>
-							<legend>Datos personales</legend>
-							{{ form_label(formulario.nombre) }}
-							{{ form_errors(formulario.nombre) }}
-							{{ form_widget(formulario.nombre,{ 'attr':{ 'class':'form-control' }}) }}
-							{{ form_label(formulario.apellido) }}
-							{{ form_errors(formulario.apellido) }}
-							{{ form_widget(formulario.apellido,{ 'attr':{ 'class':'form-control' }}) }}								
-						</fieldset>
-					</div>					
+						{{ form_label(formulario.nombre) }}
+						{% if form_errors(formulario.nombre) %}
+							<div class="alert alert-danger">{{ form_errors(formulario.nombre) }}</div>
+						{% endif %}
+						{{ form_widget(formulario.nombre,{ 'attr':{ 'class':'form-control' }}) }}
+					</div>
+					<div class="form-group">
+						{{ form_label(formulario.apellido) }}
+						{% if form_errors(formulario.apellido) %}
+							<div class="alert alert-danger">{{ form_errors(formulario.apellido) }}</div>
+						{% endif %}
+						{{ form_widget(formulario.apellido,{ 'attr':{ 'class':'form-control' }}) }}
+					</div>
+										
 						<fieldset>
 							<legend>Datos de usuario</legend>
 							<div class="form-group">
 								{{ form_label(formulario.usuario) }}
-								{{ form_errors(formulario.usuario) }}
+								{% if form_errors(formulario.usuario) %}
+									<div class="alert alert-danger">{{ form_errors(formulario.usuario) }}</div>
+								{% endif %}
 								{{ form_widget(formulario.usuario,{ 'attr':{ 'class':'form-control' }}) }}
 							</div>
 

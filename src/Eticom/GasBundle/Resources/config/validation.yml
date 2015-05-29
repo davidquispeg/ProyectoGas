@@ -1,0 +1,4 @@
+#Eticom\GasBundle\Entity\usuarios:
+#    properties:
+#        apellido:
+#            - NotBlank: { message: Te falto aqui. }

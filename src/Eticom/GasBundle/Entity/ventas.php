@@ -18,7 +18,7 @@ class ventas
 	Protected $id;
 
 	/**
-	* @ORM\Column(type="date")	
+	* @ORM\Column(type="date")
 	*/
 	Protected $fecha;
 

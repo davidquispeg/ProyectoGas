@@ -1,39 +1,48 @@
-{% extends '::base.html.twig' %}
+{% extends  is_granted('ROLE_ADMIN') ? '::admin.html.twig' : '::frontend.html.twig' %}
 {% block title %} Cliente {% endblock %}
 {% block body %}
-<h1>Historial de Compras</h1>
-<h2>Cliente: {{ cliente.nombre }} {{ cliente.apellido }} <a class="btn btn-success" href="{{ path('eticom_gas_todoscliente') }}">Listado de Clientes</a> <a class="btn btn-primary" href="{{ path('eticom_gas_inicio') }}">Inicio</a></h2>
-<table class="table table-striped">
-	<tr>
-		<th>Fecha</th>
-		<th>Precio</th>
-		<th>Cantidad</th>
-		<th>Total</th>
-		<th>Nro Ticket</th>
-		<th>Credito</th>
-		<th>Prestamo Balon</th>
-	</tr>
-	{% for c in venta %}
-	<tr>
-		<td>{{ c.fecha | date() }}</td>
-		<td>S/.{{ c.monto }}</td>
-		<td>{{ c.cantidad }}</td>
-		<td>S/.{{ c.cantidad * c.monto }}</td>
-		<td>{{ c.nroTicket }}</td>
-		{% if c.creditos %}
-		    <td class="danger">Si</td>
-		{% else %}
-		    <td>No</td>
-		{% endif %}
-		{% if c.prestamoBalon %}
-		    <td class="danger">Si</td>
-		{% else %}
-		    <td>No</td>
-		{% endif %}
-		{% if c.creditos or c.prestamoBalon %}
-		    <td><a href="{{ path('eticom_gas_actualizarventa',{'idventa':c.IdVentas}) }}">Actualizar</a></td>
-		{% endif %}
-	</tr>
-	{% endfor %}
-</table>
+{{ parent() }}
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<h1>Historial de Compras</h1>
+			<h2>Cliente: {{ cliente.nombre }} {{ cliente.apellido }}</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Fecha</th>
+					<th>Precio</th>
+					<th>Cantidad</th>
+					<th>Total</th>
+					<th>Nro Ticket</th>
+					<th>Credito</th>
+					<th>Prestamo Balon</th>
+				</tr>
+				{% for c in venta %}
+				<tr>
+					<td>{{ c.fecha | date() }}</td>
+					<td>S/.{{ c.monto }}</td>
+					<td>{{ c.cantidad }}</td>
+					<td>S/.{{ c.cantidad * c.monto }}</td>
+					<td>{{ c.nroTicket }}</td>
+					{% if c.creditos %}
+					    <td class="danger">Si</td>
+					{% else %}
+					    <td>No</td>
+					{% endif %}
+					{% if c.prestamoBalon %}
+					    <td class="danger">Si</td>
+					{% else %}
+					    <td>No</td>
+					{% endif %}
+					{% if c.creditos or c.prestamoBalon %}
+					    <td><a href="{{ path('eticom_gas_actualizarventa',{'idventa':c.IdVentas}) }}">Actualizar</a></td>
+					{% endif %}
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+</div>
 {% endblock %}

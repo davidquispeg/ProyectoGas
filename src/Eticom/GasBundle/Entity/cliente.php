@@ -32,7 +32,7 @@ class cliente
 
 	/**
 	* @ORM\Column(type="string", length=12)
-    * @Assert\NotBlank(message="Debes introducir un texto.")
+    * @Assert\NotBlank(message="Introduce un valor.")
 	*/
 	protected $celular;
 
